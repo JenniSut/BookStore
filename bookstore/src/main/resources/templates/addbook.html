@@ -18,7 +18,14 @@
 				<input type="text" id="isbn" th:field="*{isbn}" class="form-control" placeholder="ISBN"/> 
 				<label for="year">Year</label>
 				<input type="text" id="year" th:field="*{year}" class="form-control" placeholder="Year"/> 
+				<label for="price">Price</label>
+				<input type="text" id="price" th:field="*{price}" class="form-control" placeholder="Price"/> 
+				<label for="catlist">Category</label>
+			 	<select id="catlist" th:field="*{category}" class="form-control">
+       				<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
+    			</select>
 				<br>
+				
 				<input type="submit" value="Save" class="btn btn-primary"></input>
 			</div>
 		</form>

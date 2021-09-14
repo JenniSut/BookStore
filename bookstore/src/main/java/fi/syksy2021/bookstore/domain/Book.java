@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import fi.syksy2021.bookstore.domain.Category;
+
 
 @Entity
 public class Book {
@@ -12,10 +16,27 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String title, author, isbn;
-	private int year, price;
+	private int year;
+	private float price;
+	
+	@ManyToOne
+    @JoinColumn(name = "categoryid")
+    private Category category;
 
-	public Book(String title, String author, String isbn, int year, int price) {
+	public Book(String title, String author, String isbn, int year, float price, Category category) {
 		super();
+		this.title = title;
+		this.author = author;
+		this.isbn = isbn;
+		this.year = year;
+		this.price = price;
+		this.category = category;
+	}
+
+	
+	public Book(Long id, String title, String author, String isbn, int year, float price) {
+		super();
+		this.id = id;
 		this.title = title;
 		this.author = author;
 		this.isbn = isbn;
@@ -23,7 +44,17 @@ public class Book {
 		this.price = price;
 	}
 
-	
+
+	public Category getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+
 	public Book() {}
 
 
@@ -76,11 +107,11 @@ public class Book {
 		this.year = year;
 	}
 
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 
@@ -88,7 +119,7 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", year=" + year
-				+ ", price=" + price + "]";
+				+ ", price=" + price + ", category=" + category + "]";
 	}
 
 	
