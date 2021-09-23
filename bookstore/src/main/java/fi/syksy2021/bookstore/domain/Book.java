@@ -6,6 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import fi.syksy2021.bookstore.domain.Category;
 
 
@@ -13,13 +17,15 @@ import fi.syksy2021.bookstore.domain.Category;
 public class Book {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title, author, isbn;
 	private int year;
 	private float price;
 	
 	@ManyToOne
+	@JsonIgnoreProperties ("books")
+	//@JsonIgnore
     @JoinColumn(name = "categoryid")
     private Category category;
 
